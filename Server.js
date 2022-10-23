@@ -14,7 +14,6 @@ io.on(process.env.newClient, socket => {
     socket.emit(process.env.connectionEvent, "Authentication required to continue!")
 
     socket.on(process.env.authentificationEvent, message => {
-        console.log(`Client has authenticated as: ${message}`)
 
         if(message === process.env.relayStation) connections.relayStation = socket;
         else if (message === process.env.receiver) connections.receivers = socket;
@@ -22,6 +21,8 @@ io.on(process.env.newClient, socket => {
             socket.emit(process.env.authentificationEvent, "Access denied!")
             socket.close();
         }
+
+        console.log("Client has successfully authenticated!")
     })
 
     socket.on(process.env.dataEvent, data => {
