@@ -16,7 +16,9 @@ io.on(process.env.newClient, socket => {
     socket.on(process.env.authentificationEvent, message => {
 
         if(message === process.env.relayStation) connections.relayStation = socket;
-        else if (message === process.env.receiver) connections.receivers = socket;
+        else if (message === process.env.receiver) {
+            if(!connections.receivers.find(r => r === socket)) connections.receivers = socket; // add new clients
+        }
         else {
             socket.emit(process.env.authentificationEvent, "Access denied!")
         }
