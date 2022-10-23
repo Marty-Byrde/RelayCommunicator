@@ -19,7 +19,6 @@ io.on(process.env.newClient, socket => {
         else if (message === process.env.receiver) connections.receivers = socket;
         else {
             socket.emit(process.env.authentificationEvent, "Access denied!")
-            socket.close();
         }
 
         console.log("Client has successfully authenticated!")
