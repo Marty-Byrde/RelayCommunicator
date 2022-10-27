@@ -30,7 +30,7 @@ io.on(process.env.newClient, socket => {
         console.log(`Transmitting data to receivers!`)
 
         for(let client of connections.receivers){
-            client.emit(process.env.dataEvent, data)
+            client.emit(data.route, data)
         }
     })
 })
