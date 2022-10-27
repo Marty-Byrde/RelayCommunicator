@@ -29,8 +29,10 @@ io.on(process.env.newClient, socket => {
     socket.on(process.env.dataEvent, data => {
         console.log(`Transmitting data to receivers!`)
 
+        let route = data.params.route ? data.params.route.replace(/"/g, '') : process.env.dataEvent
+
         for(let client of connections.receivers){
-            client.emit(data.route, data)
+            client.emit(route, data)
         }
     })
 })
